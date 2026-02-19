@@ -1,0 +1,37 @@
+# Topics and RSS sources
+Labs:
+  - name: ALCF News
+    url: https://www.alcf.anl.gov/news/rss.xml
+  - name: NERSC News
+    url: https://www.nersc.gov/news-and-events/news/rss
+  - name: ORNL News Releases
+    url: https://www.ornl.gov/RssFeeds/ornl_news_releases.xml
+  - name: NERSC User News
+    url: https://www.nersc.gov/users/user-news/rss
+
+Tech News:
+  - name: HPCWire Featured
+    url: http://www.hpcwire.com/rss/hpcwire/featured/feed.rss
+  - name: Newswise (21235)
+    url: https://www.newswise.com/legacy/feed/institution.php?inst=21235
+  - name: Newswise (2742)
+    url: https://www.newswise.com/legacy/feed/institution.php?inst=2742
+  - name: Notus
+    url: https://www.notus.org/all-notus-stories.rss
+
+# Example of a manual scrape entry. To enable scraping for a source, set
+# `scrape: true` and provide `selectors` with CSS selectors. The `list`
+# selector should match each article/item container; nested selectors pick
+# the title, link, content and date inside each container.
+#
+# Example:
+#  - name: Example Scraped Site
+#    url: https://example.org/news
+#    scrape: true
+#    selectors:
+#      list: ".article-listing .item"
+#      title: ".title"
+#      link: ".title a"
+#      content: ".teaser"
+#      date: ".date"
+
