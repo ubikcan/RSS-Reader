@@ -1,0 +1,12 @@
+{
+  "feeds": [
+    {
+      "url": "https://example.com/feed.xml",
+      "type": "rss"
+    },
+    {
+      "url": "https://example.com/page",
+      "type": "scrape"
+    }
+  ]
+}
