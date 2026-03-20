@@ -1,7 +1,7 @@
 {
   "feeds": [
     {
-      "url": "https://example.com/feed.xml",
+      "url": "https://www.alcf.anl.gov/news/rss.xml",
       "type": "rss"
     },
     {
