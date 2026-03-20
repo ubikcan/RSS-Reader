@@ -7,6 +7,10 @@
     {
       "url": "https://example.com/page",
       "type": "scrape"
+    },
+    {
+      "url": "https://www.ornl.gov/RssFeeds/ornl_news_releases.xml",
+      "type": "rss"
     }
   ]
 }
