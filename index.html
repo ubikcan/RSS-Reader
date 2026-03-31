@@ -27,6 +27,30 @@
 </head>
 <body class="min-h-screen font-sans">
 
+<!-- ── Password Modal ───────────────────────────────────────────────────── -->
+<div id="pw-backdrop"
+     class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+  <div class="bg-gray-900 border border-gray-700 rounded-xl shadow-2xl w-full max-w-sm p-6">
+    <h2 class="text-lg font-semibold text-white mb-4">Enter Password</h2>
+    <input id="inp-password" type="password" placeholder="Password"
+           class="w-full bg-gray-950 border border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-100
+                  placeholder-gray-600 focus:outline-none focus:border-indigo-500 mb-3" />
+    <div id="pw-error" class="hidden text-xs text-red-400 mb-3">Incorrect password.</div>
+    <div class="flex gap-2">
+      <button id="btn-pw-cancel"
+              class="flex-1 bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-300
+                     font-medium rounded-lg py-2 text-sm transition-colors">
+        Cancel
+      </button>
+      <button id="btn-pw-submit"
+              class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-lg
+                     py-2 text-sm transition-colors">
+        Unlock
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- ── Settings Modal ───────────────────────────────────────────────────── -->
 <div id="modal-backdrop"
      class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
@@ -155,6 +179,59 @@ const GIST_FILENAME = "rss_read_state.json";
 
 const LS_TOKEN  = "rss_gh_token";
 const LS_GIST   = "rss_gist_id";
+
+// ── Password protection ────────────────────────────────────────────────────
+const CONTROLS_PASSWORD = "changeme";
+const SS_UNLOCKED = "rss_unlocked";
+
+// Returns a Promise that resolves when the user is authenticated.
+// Resolves immediately if already unlocked in this session.
+function requireAuth() {
+  if (sessionStorage.getItem(SS_UNLOCKED) === "1") return Promise.resolve();
+
+  return new Promise((resolve, reject) => {
+    const backdrop = document.getElementById("pw-backdrop");
+    const input    = document.getElementById("inp-password");
+    const errEl    = document.getElementById("pw-error");
+
+    input.value = "";
+    errEl.classList.add("hidden");
+    backdrop.classList.remove("hidden");
+    input.focus();
+
+    function cleanup() {
+      backdrop.classList.add("hidden");
+      document.removeEventListener("keydown", onKey);
+    }
+
+    function attempt() {
+      if (input.value === CONTROLS_PASSWORD) {
+        sessionStorage.setItem(SS_UNLOCKED, "1");
+        cleanup();
+        resolve();
+      } else {
+        errEl.classList.remove("hidden");
+        input.value = "";
+        input.focus();
+      }
+    }
+
+    function cancel() {
+      cleanup();
+      reject(new Error("cancelled"));
+    }
+
+    function onKey(e) {
+      if (e.key === "Enter")  attempt();
+      if (e.key === "Escape") cancel();
+    }
+
+    document.getElementById("btn-pw-submit").onclick = attempt;
+    document.getElementById("btn-pw-cancel").onclick = cancel;
+    backdrop.onclick = e => { if (e.target === backdrop) cancel(); };
+    document.addEventListener("keydown", onKey);
+  });
+}
 
 // ── State ──────────────────────────────────────────────────────────────────
 let allItems  = [];
@@ -313,7 +390,8 @@ function render() {
            </svg>`
         : "";
 
-      btn.addEventListener("click", () => {
+      btn.addEventListener("click", async () => {
+        try { await requireAuth(); } catch { return; }
         readState[item.link] = !readState[item.link];
         if (!readState[item.link]) delete readState[item.link];
         scheduleSave();
@@ -366,7 +444,8 @@ document.querySelectorAll(".filter-btn").forEach(btn => {
 });
 
 // ── Mark all read ──────────────────────────────────────────────────────────
-document.getElementById("btn-mark-all-read").addEventListener("click", () => {
+document.getElementById("btn-mark-all-read").addEventListener("click", async () => {
+  try { await requireAuth(); } catch { return; }
   allItems.forEach(i => { readState[i.link] = true; });
   scheduleSave();
   render();
@@ -385,6 +464,8 @@ document.getElementById("btn-refresh").addEventListener("click", async () => {
 
 // ── Add Feed ───────────────────────────────────────────────────────────────
 document.getElementById("btn-add-feed").addEventListener("click", async () => {
+  try { await requireAuth(); } catch { return; }
+
   const url  = document.getElementById("inp-feed-url").value.trim();
   const type = document.getElementById("inp-feed-type").value;
   const msg  = document.getElementById("add-feed-msg");
