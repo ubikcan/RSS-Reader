@@ -15,6 +15,10 @@
     {
       "url": "https://www.olcf.ornl.gov/olcf-news/",
       "type": "scrape"
+    },
+    {
+      "url": "https://www.anl.gov/taxonomy/term/3936/feed",
+      "type": "rss"
     }
   ]
 }
