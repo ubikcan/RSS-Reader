@@ -11,6 +11,10 @@
     {
       "url": "https://www.ornl.gov/RssFeeds/ornl_news_releases.xml",
       "type": "rss"
+    },
+    {
+      "url": "https://www.olcf.ornl.gov/olcf-news/",
+      "type": "scrape"
     }
   ]
 }
