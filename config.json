@@ -19,6 +19,10 @@
     {
       "url": "https://www.anl.gov/taxonomy/term/3936/feed",
       "type": "rss"
+    },
+    {
+      "url": "https://www.bbc.com/sport",
+      "type": "rss"
     }
   ]
 }
