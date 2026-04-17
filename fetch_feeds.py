@@ -68,6 +68,10 @@ def main():
     config = load_config()
     existing = load_existing_items()
 
+    active_sources = {feed["url"] for feed in config["feeds"]}
+    existing = {link: item for link, item in existing.items()
+                if item.get("source") in active_sources}
+
     for feed in config["feeds"]:
         url = feed["url"]
         feed_type = feed["type"]
