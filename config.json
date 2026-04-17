@@ -27,6 +27,10 @@
     {
       "url": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
       "type": "rss"
+    },
+    {
+      "url": "https://www.nersc.gov/news-and-events/news/",
+      "type": "rss"
     }
   ]
 }
