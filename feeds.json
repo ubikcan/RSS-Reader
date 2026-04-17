@@ -5920,5 +5920,173 @@
     "source": "https://feeds.bbci.co.uk/news/rss.xml",
     "published": "Fri, 17 Apr 2026 07:31:32 GMT",
     "hash": null
+  },
+  {
+    "title": "AI, automation drive autonomous science",
+    "link": "https://www.ornl.gov/news/ai-automation-drive-autonomous-science",
+    "source": "https://www.ornl.gov/RssFeeds/ornl_news_releases.xml",
+    "published": "Thu, 16 Apr 2026 14:08:03 +0000",
+    "hash": null
+  },
+  {
+    "title": "Graphite Reactor physicist returns to ORNL",
+    "link": "https://www.ornl.gov/news/graphite-reactor-physicist-returns-ornl",
+    "source": "https://www.ornl.gov/RssFeeds/ornl_news_releases.xml",
+    "published": "Thu, 16 Apr 2026 14:16:52 +0000",
+    "hash": null
+  },
+  {
+    "title": "Nanodiamonds and Beyond: Designing Carbon Materials with Artificial Intelligence at Exascale",
+    "link": "https://www.olcf.ornl.gov/2026/03/16/nanodiamonds-and-beyond-designing-carbon-materials-with-artificial-intelligence-at-exascale/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Mon, 16 Mar 2026 15:52:43 GMT",
+    "hash": null
+  },
+  {
+    "title": "The New Frontier of Fluid Turbulence Simulations: 35-Trillion Grid Points",
+    "link": "https://www.olcf.ornl.gov/2026/02/09/the-new-frontier-of-fluid-turbulence-simulations-35-trillion-grid-points/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Mon, 09 Feb 2026 18:50:22 GMT",
+    "hash": null
+  },
+  {
+    "title": "Frontier Provides High-Fidelity Insights into Turbine Aerothermal Performance",
+    "link": "https://www.olcf.ornl.gov/2026/01/27/frontier-provides-high-fidelity-insights-into-turbine-aerothermal-performance/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Tue, 27 Jan 2026 15:27:32 GMT",
+    "hash": null
+  },
+  {
+    "title": "Call for Proposals Open to Develop Discovery Supercomputer\u2019s First Science Applications",
+    "link": "https://www.olcf.ornl.gov/2026/01/12/call-for-proposals-open-to-develop-discovery-supercomputers-first-science-applications/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Mon, 12 Jan 2026 15:02:48 GMT",
+    "hash": null
+  },
+  {
+    "title": "OLCF\u2019s 2025 in Review",
+    "link": "https://www.olcf.ornl.gov/2025/12/22/olcfs-2025-in-review/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Mon, 22 Dec 2025 15:54:48 GMT",
+    "hash": null
+  },
+  {
+    "title": "Arx2 Storage System Gets a Powerful Upgrade",
+    "link": "https://www.olcf.ornl.gov/2025/12/18/arx2-storage-system-gets-a-powerful-upgrade/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Thu, 18 Dec 2025 14:43:32 GMT",
+    "hash": null
+  },
+  {
+    "title": "Frontier Supercomputer Ushers in New Era of Nuclear AI",
+    "link": "https://www.olcf.ornl.gov/2025/12/11/frontier-supercomputer-ushers-in-new-era-of-nuclear-ai/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Thu, 11 Dec 2025 19:26:31 GMT",
+    "hash": null
+  },
+  {
+    "title": "HPC Course Showcased at USRSE25 to Train Future Supercomputing Experts",
+    "link": "https://www.olcf.ornl.gov/2025/12/09/hpc-course-showcased-at-usrse25-to-train-future-supercomputing-experts/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Tue, 09 Dec 2025 19:28:33 GMT",
+    "hash": null
+  },
+  {
+    "title": "Celeritas Code Sets Fast Pace for Particle Physics Discoveries",
+    "link": "https://www.olcf.ornl.gov/2025/11/19/celeritas-code-sets-fast-pace-for-particle-physics-discoveries/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Wed, 19 Nov 2025 14:09:43 GMT",
+    "hash": null
+  },
+  {
+    "title": "Frontier Simulations Spin Up New Details for Quantum Understanding",
+    "link": "https://www.olcf.ornl.gov/2025/11/17/frontier-simulations-spin-up-new-details-for-quantum-understanding/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Mon, 17 Nov 2025 18:47:34 GMT",
+    "hash": null
+  },
+  {
+    "title": "Training on Frontier Delivers Faster, More Precise AI Weather Forecasts",
+    "link": "https://www.olcf.ornl.gov/2025/11/14/training-on-frontier-delivers-faster-more-precise-ai-weather-forecasts/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Fri, 14 Nov 2025 19:49:48 GMT",
+    "hash": null
+  },
+  {
+    "title": "Frontier Supercomputer Simulates Next-Generation Transistors at Exascale",
+    "link": "https://www.olcf.ornl.gov/2025/11/14/frontier-supercomputer-simulates-next-generation-transistors-at-exascale/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Fri, 14 Nov 2025 19:49:40 GMT",
+    "hash": null
+  },
+  {
+    "title": "Largest-Ever Universe Simulation Up for Supercomputing\u2019s Highest Prize",
+    "link": "https://www.olcf.ornl.gov/2025/11/14/largest-ever-universe-simulation-up-for-supercomputings-highest-prize/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Fri, 14 Nov 2025 17:37:40 GMT",
+    "hash": null
+  },
+  {
+    "title": "OLCF\u2019s Bronson Messer Named APS Fellow",
+    "link": "https://www.olcf.ornl.gov/2025/11/14/olcfs-bronson-messer-named-aps-fellow/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Fri, 14 Nov 2025 11:42:27 GMT",
+    "hash": null
+  },
+  {
+    "title": "ORNL, NVIDIA, HPE Advance Quantum Computing, AI, and HPC for Science",
+    "link": "https://www.olcf.ornl.gov/2025/11/03/ornl-nvidia-hpe-advance-quantum-computing-ai-and-hpc-for-science/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Mon, 03 Nov 2025 17:48:06 GMT",
+    "hash": null
+  },
+  {
+    "title": "ORNL, AMD, and HPE to Deliver DOE\u2019s Newest AI Supercomputers: Discovery and Lux",
+    "link": "https://www.olcf.ornl.gov/2025/10/27/ornl-amd-and-hpe-to-deliver-does-newest-ai-supercomputers-discovery-and-lux/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Mon, 27 Oct 2025 19:00:24 GMT",
+    "hash": null
+  },
+  {
+    "title": "New CFD Methodology Supersizes Results",
+    "link": "https://www.olcf.ornl.gov/2025/09/30/new-cfd-methodology-supersizes-results/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Tue, 30 Sep 2025 20:33:33 GMT",
+    "hash": null
+  },
+  {
+    "title": "Frontier Simulations Pierce Mysteries of Galactic Nuclei",
+    "link": "https://www.olcf.ornl.gov/2025/09/30/frontier-simulations-pierce-mysteries-of-galactic-nuclei/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Tue, 30 Sep 2025 19:07:16 GMT",
+    "hash": null
+  },
+  {
+    "title": "OLCF, HPE Team Honored for ExaDigiT Innovation",
+    "link": "https://www.olcf.ornl.gov/2025/09/24/olcf-hpe-team-honored-for-exadigit-innovation/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Wed, 24 Sep 2025 16:07:48 GMT",
+    "hash": null
+  },
+  {
+    "title": "Quantum Brilliance, ORNL Pioneer Quantum-Classical Hybrid Computing",
+    "link": "https://www.olcf.ornl.gov/2025/09/02/quantum-brilliance-ornl-pioneer-quantum-classical-hybrid-computing/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Tue, 02 Sep 2025 13:55:35 GMT",
+    "hash": null
+  },
+  {
+    "title": "Shock Treatment for CFD Simulations",
+    "link": "https://www.olcf.ornl.gov/2025/07/23/shock-treatment-for-cfd-simulations/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Wed, 23 Jul 2025 21:35:57 GMT",
+    "hash": null
+  },
+  {
+    "title": "Quantum Computing Experiment Realizes Verifiably Random Number",
+    "link": "https://www.olcf.ornl.gov/2025/05/05/quantum-computing-experiment-realizes-verifiably-random-number/",
+    "source": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+    "published": "Mon, 05 May 2025 17:10:00 GMT",
+    "hash": null
   }
 ]
