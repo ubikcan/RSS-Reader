@@ -1,44 +1,56 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-gray-950 text-gray-200">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RSS Reader</title>
+  <!-- Apply theme before paint to avoid flash -->
+  <script>
+    if (localStorage.getItem("rss_theme") === "dark") {
+      document.documentElement.classList.add("dark");
+    }
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
+      darkMode: "class",
       theme: {
         extend: {
           colors: {
-            gray: {
-              950: "#0a0c14",
-            }
+            gray: { 950: "#0a0c14" }
           }
         }
       }
     }
   </script>
   <style>
-    /* Tailwind CDN doesn't include scrollbar styles */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
+
+    /* Unsubscribe buttons: hidden until unlocked class is on <html> */
+    .unsub-btn { display: none; }
+    html.unlocked .unsub-btn { display: inline-flex; }
   </style>
 </head>
-<body class="min-h-screen font-sans">
+<body class="min-h-screen font-sans bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-200">
 
 <!-- ── Password Modal ───────────────────────────────────────────────────── -->
 <div id="pw-backdrop"
      class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-  <div class="bg-gray-900 border border-gray-700 rounded-xl shadow-2xl w-full max-w-sm p-6">
-    <h2 class="text-lg font-semibold text-white mb-4">Enter Password</h2>
+  <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700
+              rounded-xl shadow-2xl w-full max-w-sm p-6">
+    <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Enter Password</h2>
     <input id="inp-password" type="password" placeholder="Password"
-           class="w-full bg-gray-950 border border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-100
-                  placeholder-gray-600 focus:outline-none focus:border-indigo-500 mb-3" />
-    <div id="pw-error" class="hidden text-xs text-red-400 mb-3">Incorrect password.</div>
+           class="w-full bg-gray-100 dark:bg-gray-950 border border-gray-300 dark:border-gray-700
+                  rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-gray-100
+                  placeholder-gray-400 dark:placeholder-gray-600
+                  focus:outline-none focus:border-indigo-500 mb-3" />
+    <div id="pw-error" class="hidden text-xs text-red-500 dark:text-red-400 mb-3">Incorrect password.</div>
     <div class="flex gap-2">
       <button id="btn-pw-cancel"
-              class="flex-1 bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-300
+              class="flex-1 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700
+                     border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300
                      font-medium rounded-lg py-2 text-sm transition-colors">
         Cancel
       </button>
@@ -54,30 +66,35 @@
 <!-- ── Settings Modal ───────────────────────────────────────────────────── -->
 <div id="modal-backdrop"
      class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-  <div class="bg-gray-900 border border-gray-700 rounded-xl shadow-2xl w-full max-w-md p-6">
-    <h2 class="text-lg font-semibold text-white mb-1">GitHub Credentials</h2>
-    <p class="text-sm text-gray-400 mb-5 leading-relaxed">
+  <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700
+              rounded-xl shadow-2xl w-full max-w-md p-6">
+    <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">GitHub Credentials</h2>
+    <p class="text-sm text-gray-500 dark:text-gray-400 mb-5 leading-relaxed">
       Read state is saved to a GitHub Gist. "Add Feed" commits to your repo.
-      Provide a PAT with <span class="text-gray-200 font-medium">repo</span> +
-      <span class="text-gray-200 font-medium">gist</span> scopes, and the ID of
+      Provide a PAT with <span class="text-gray-800 dark:text-gray-200 font-medium">repo</span> +
+      <span class="text-gray-800 dark:text-gray-200 font-medium">gist</span> scopes, and the ID of
       an existing Gist (create a blank one if needed).
     </p>
 
-    <label class="block text-xs text-gray-400 mb-1" for="inp-token">Personal Access Token</label>
+    <label class="block text-xs text-gray-500 dark:text-gray-400 mb-1" for="inp-token">Personal Access Token</label>
     <input id="inp-token" type="password" placeholder="ghp_…"
-           class="w-full bg-gray-950 border border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-100
-                  placeholder-gray-600 focus:outline-none focus:border-indigo-500 mb-4" />
+           class="w-full bg-gray-100 dark:bg-gray-950 border border-gray-300 dark:border-gray-700
+                  rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-gray-100
+                  placeholder-gray-400 dark:placeholder-gray-600
+                  focus:outline-none focus:border-indigo-500 mb-4" />
 
-    <label class="block text-xs text-gray-400 mb-1" for="inp-gist">Gist ID</label>
+    <label class="block text-xs text-gray-500 dark:text-gray-400 mb-1" for="inp-gist">Gist ID</label>
     <input id="inp-gist" type="text" placeholder="a1b2c3d4e5f6…"
-           class="w-full bg-gray-950 border border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-100
-                  placeholder-gray-600 focus:outline-none focus:border-indigo-500 mb-5" />
+           class="w-full bg-gray-100 dark:bg-gray-950 border border-gray-300 dark:border-gray-700
+                  rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-gray-100
+                  placeholder-gray-400 dark:placeholder-gray-600
+                  focus:outline-none focus:border-indigo-500 mb-5" />
 
-    <div id="modal-error" class="hidden text-xs text-red-400 mb-3"></div>
+    <div id="modal-error" class="hidden text-xs text-red-500 dark:text-red-400 mb-3"></div>
 
     <button id="btn-modal-save"
-            class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-lg py-2 text-sm
-                   transition-colors">
+            class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-lg
+                   py-2 text-sm transition-colors">
       Save &amp; Continue
     </button>
   </div>
@@ -88,19 +105,30 @@
 
   <!-- Header -->
   <div class="flex items-center justify-between mb-6">
-    <h1 class="text-xl font-bold text-white tracking-tight">RSS Reader</h1>
+    <h1 class="text-xl font-bold tracking-tight">RSS Reader</h1>
     <div class="flex items-center gap-2">
       <span id="status-badge"
-            class="text-xs text-gray-500 px-2 py-1 rounded-md bg-gray-900 border border-gray-800">
+            class="text-xs text-gray-500 px-2 py-1 rounded-md
+                   bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800">
         Loading…
       </span>
       <button id="btn-refresh"
-              class="text-xs bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-300
+              class="text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700
+                     border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300
                      px-3 py-1.5 rounded-lg transition-colors">
         Refresh
       </button>
+      <!-- Light/Dark toggle -->
+      <button id="btn-theme"
+              class="text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700
+                     border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300
+                     px-2 py-1.5 rounded-lg transition-colors"
+              title="Toggle light/dark mode">
+        <!-- icon injected by JS -->
+      </button>
       <button id="btn-settings"
-              class="text-xs bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-300
+              class="text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700
+                     border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300
                      px-3 py-1.5 rounded-lg transition-colors">
         Settings
       </button>
@@ -109,7 +137,7 @@
 
   <!-- Add Feed -->
   <details class="mb-6 group">
-    <summary class="cursor-pointer text-sm text-indigo-400 hover:text-indigo-300 select-none
+    <summary class="cursor-pointer text-sm text-indigo-500 hover:text-indigo-400 select-none
                     list-none flex items-center gap-1">
       <svg class="w-4 h-4 transition-transform group-open:rotate-90" fill="none"
            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -117,13 +145,16 @@
       </svg>
       Add Feed
     </summary>
-    <div class="mt-3 bg-gray-900 border border-gray-700 rounded-xl p-4">
+    <div class="mt-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
       <div class="flex gap-2 flex-wrap">
         <input id="inp-feed-url" type="url" placeholder="https://example.com/feed.xml"
-               class="flex-1 min-w-0 bg-gray-950 border border-gray-700 rounded-lg px-3 py-2 text-sm
-                      text-gray-100 placeholder-gray-600 focus:outline-none focus:border-indigo-500" />
+               class="flex-1 min-w-0 bg-gray-100 dark:bg-gray-950 border border-gray-300 dark:border-gray-700
+                      rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-gray-100
+                      placeholder-gray-400 dark:placeholder-gray-600
+                      focus:outline-none focus:border-indigo-500" />
         <select id="inp-feed-type"
-                class="bg-gray-950 border border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-100
+                class="bg-gray-100 dark:bg-gray-950 border border-gray-300 dark:border-gray-700
+                       rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-gray-100
                        focus:outline-none focus:border-indigo-500">
           <option value="rss">RSS</option>
           <option value="scrape">Scrape</option>
@@ -148,24 +179,27 @@
     </button>
     <button data-filter="unread"
             class="filter-btn text-xs px-3 py-1 rounded-full border transition-colors
-                   bg-gray-800 border-gray-700 text-gray-400 hover:border-gray-500">
+                   bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700
+                   text-gray-500 dark:text-gray-400 hover:border-gray-400 dark:hover:border-gray-500">
       Unread
     </button>
     <button data-filter="read"
             class="filter-btn text-xs px-3 py-1 rounded-full border transition-colors
-                   bg-gray-800 border-gray-700 text-gray-400 hover:border-gray-500">
+                   bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700
+                   text-gray-500 dark:text-gray-400 hover:border-gray-400 dark:hover:border-gray-500">
       Read
     </button>
     <button id="btn-mark-all-read"
-            class="ml-auto text-xs bg-gray-800 hover:bg-gray-700 border border-gray-700
-                   text-gray-400 px-3 py-1 rounded-full transition-colors">
+            class="ml-auto text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700
+                   border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400
+                   px-3 py-1 rounded-full transition-colors">
       Mark all read
     </button>
   </div>
 
   <!-- Feed list -->
   <div id="feed-container" class="space-y-6"></div>
-  <p id="empty-msg" class="hidden text-sm text-gray-600 mt-8 text-center">No items to show.</p>
+  <p id="empty-msg" class="hidden text-sm text-gray-400 mt-8 text-center">No items to show.</p>
 
 </div><!-- /main -->
 
@@ -179,13 +213,12 @@ const GIST_FILENAME = "rss_read_state.json";
 
 const LS_TOKEN  = "rss_gh_token";
 const LS_GIST   = "rss_gist_id";
+const LS_THEME  = "rss_theme";
 
 // ── Password protection ────────────────────────────────────────────────────
 const CONTROLS_PASSWORD = "changeme";
 const SS_UNLOCKED = "rss_unlocked";
 
-// Returns a Promise that resolves when the user is authenticated.
-// Resolves immediately if already unlocked in this session.
 function requireAuth() {
   if (sessionStorage.getItem(SS_UNLOCKED) === "1") return Promise.resolve();
 
@@ -207,6 +240,8 @@ function requireAuth() {
     function attempt() {
       if (input.value === CONTROLS_PASSWORD) {
         sessionStorage.setItem(SS_UNLOCKED, "1");
+        // Show unsubscribe buttons for this session
+        document.documentElement.classList.add("unlocked");
         cleanup();
         resolve();
       } else {
@@ -235,7 +270,7 @@ function requireAuth() {
 
 // ── State ──────────────────────────────────────────────────────────────────
 let allItems  = [];
-let readState = {};   // { [link]: true }
+let readState = {};
 let filter    = "all";
 let saveTimer = null;
 
@@ -295,12 +330,9 @@ function scheduleSave() {
 // ── GitHub Contents API (config.json) ──────────────────────────────────────
 async function addFeedToConfig(url, type) {
   const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CONFIG_PATH}`;
-
-  // Get current file (need SHA for update)
   const current = await ghFetch(apiUrl);
   const decoded = JSON.parse(atob(current.content.replace(/\n/g, "")));
 
-  // Check for duplicate
   if (decoded.feeds.some(f => f.url === url)) {
     throw new Error("This URL is already in config.json.");
   }
@@ -311,6 +343,21 @@ async function addFeedToConfig(url, type) {
     method: "PUT",
     body: JSON.stringify({
       message: `chore: add ${type} feed ${url}`,
+      content: btoa(JSON.stringify(decoded, null, 2) + "\n"),
+      sha: current.sha,
+    }),
+  });
+}
+
+async function removeFeedFromConfig(feedUrl) {
+  const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CONFIG_PATH}`;
+  const current = await ghFetch(apiUrl);
+  const decoded = JSON.parse(atob(current.content.replace(/\n/g, "")));
+  decoded.feeds = decoded.feeds.filter(f => f.url !== feedUrl);
+  await ghFetch(apiUrl, {
+    method: "PUT",
+    body: JSON.stringify({
+      message: `chore: remove feed ${feedUrl}`,
       content: btoa(JSON.stringify(decoded, null, 2) + "\n"),
       sha: current.sha,
     }),
@@ -351,7 +398,6 @@ function render() {
     return true;
   });
 
-  // Group by source, preserving insertion (newest-first) order
   const groups = new Map();
   for (const item of visible) {
     if (!groups.has(item.source)) groups.set(item.source, []);
@@ -363,26 +409,56 @@ function render() {
   for (const [source, items] of groups) {
     const section = document.createElement("div");
 
-    // Source header
+    // Source header row
     const header = document.createElement("div");
-    header.className = "text-xs font-semibold uppercase tracking-widest text-gray-500 " +
-                       "border-b border-gray-800 pb-1.5 mb-1";
-    header.textContent = sourceLabel(source);
+    header.className = "flex items-center justify-between border-b border-gray-200 dark:border-gray-800 pb-1.5 mb-1";
+
+    const label = document.createElement("span");
+    label.className = "text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500";
+    label.textContent = sourceLabel(source);
+
+    // Unsubscribe button (shown only when unlocked via CSS)
+    const unsubBtn = document.createElement("button");
+    unsubBtn.className = "unsub-btn items-center gap-1 text-xs text-red-500 dark:text-red-400 " +
+      "hover:text-red-600 dark:hover:text-red-300 transition-colors px-2 py-0.5 rounded " +
+      "border border-red-200 dark:border-red-900/60 hover:bg-red-50 dark:hover:bg-red-950/40";
+    unsubBtn.textContent = "Unsubscribe";
+    unsubBtn.addEventListener("click", async () => {
+      try { await requireAuth(); } catch { return; }
+
+      const displayName = sourceLabel(source);
+      if (!confirm(`Are you sure you want to unsubscribe from ${displayName}?`)) return;
+
+      unsubBtn.disabled = true;
+      unsubBtn.textContent = "Removing…";
+
+      try {
+        await removeFeedFromConfig(source);
+        // Remove items from this source from local state
+        allItems = allItems.filter(i => i.source !== source);
+        render();
+      } catch (e) {
+        setStatus(e.message, true);
+        unsubBtn.disabled = false;
+        unsubBtn.textContent = "Unsubscribe";
+      }
+    });
+
+    header.append(label, unsubBtn);
     section.appendChild(header);
 
     for (const item of items) {
       const isRead = !!readState[item.link];
 
       const row = document.createElement("div");
-      row.className = "flex items-start gap-3 py-2 border-b border-gray-900 group";
+      row.className = "flex items-start gap-3 py-2 border-b border-gray-100 dark:border-gray-900 group";
 
-      // Toggle button
       const btn = document.createElement("button");
       btn.title = isRead ? "Mark unread" : "Mark read";
       btn.className = "mt-0.5 flex-shrink-0 w-4 h-4 rounded border transition-colors " +
         (isRead
           ? "bg-indigo-600 border-indigo-500"
-          : "border-gray-600 group-hover:border-indigo-500");
+          : "border-gray-300 dark:border-gray-600 group-hover:border-indigo-500");
       btn.innerHTML = isRead
         ? `<svg viewBox="0 0 12 12" fill="none" class="w-full h-full p-0.5">
              <path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.8"
@@ -398,7 +474,6 @@ function render() {
         render();
       });
 
-      // Text block
       const text = document.createElement("div");
       text.className = "flex-1 min-w-0";
 
@@ -408,10 +483,12 @@ function render() {
       link.rel = "noopener noreferrer";
       link.textContent = item.title || item.link;
       link.className = "text-sm leading-snug block truncate transition-colors " +
-        (isRead ? "text-gray-600 hover:text-gray-500" : "text-gray-200 hover:text-white");
+        (isRead
+          ? "text-gray-400 dark:text-gray-600 hover:text-gray-500 dark:hover:text-gray-500"
+          : "text-gray-800 dark:text-gray-200 hover:text-black dark:hover:text-white");
 
       const meta = document.createElement("span");
-      meta.className = "text-xs text-gray-600 mt-0.5 block";
+      meta.className = "text-xs text-gray-400 dark:text-gray-600 mt-0.5 block";
       meta.textContent = formatDate(item.published);
 
       text.append(link, meta);
@@ -422,7 +499,6 @@ function render() {
     container.appendChild(section);
   }
 
-  // Update status
   const unread = allItems.filter(i => !readState[i.link]).length;
   setStatus(`${unread} unread · ${allItems.length} total`);
 }
@@ -434,10 +510,10 @@ document.querySelectorAll(".filter-btn").forEach(btn => {
     document.querySelectorAll(".filter-btn").forEach(b => {
       const active = b === btn;
       b.className = b.className
-        .replace(/bg-\S+ border-\S+ text-\S+/g, "")
+        .replace(/bg-\S+ border-\S+ text-\S+(\s+hover:\S+)?/g, "")
         .trim() + (active
           ? " bg-indigo-600 border-indigo-500 text-white"
-          : " bg-gray-800 border-gray-700 text-gray-400 hover:border-gray-500");
+          : " bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:border-gray-400 dark:hover:border-gray-500");
     });
     render();
   });
@@ -468,7 +544,6 @@ document.getElementById("btn-add-feed").addEventListener("click", async () => {
 
   const url  = document.getElementById("inp-feed-url").value.trim();
   const type = document.getElementById("inp-feed-type").value;
-  const msg  = document.getElementById("add-feed-msg");
 
   if (!url) return showFeedMsg("Please enter a URL.", false);
 
@@ -492,8 +567,8 @@ function showFeedMsg(text, ok) {
   const el = document.getElementById("add-feed-msg");
   el.textContent = text;
   el.className = `mt-2 text-xs rounded-md px-3 py-2 ${ok
-    ? "bg-green-900/40 text-green-400 border border-green-800"
-    : "bg-red-900/40 text-red-400 border border-red-800"}`;
+    ? "bg-green-50 dark:bg-green-900/40 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800"
+    : "bg-red-50 dark:bg-red-900/40 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800"}`;
   el.classList.remove("hidden");
 }
 
@@ -540,17 +615,48 @@ document.getElementById("btn-modal-save").addEventListener("click", async () => 
   }
 });
 
+// ── Theme toggle ───────────────────────────────────────────────────────────
+const SUN_ICON  = `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+  <circle cx="12" cy="12" r="5"/>
+  <path stroke-linecap="round" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+</svg>`;
+const MOON_ICON = `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+</svg>`;
+
+function applyTheme(dark) {
+  document.documentElement.classList.toggle("dark", dark);
+  document.getElementById("btn-theme").innerHTML = dark ? SUN_ICON : MOON_ICON;
+  document.getElementById("btn-theme").title = dark ? "Switch to light mode" : "Switch to dark mode";
+}
+
+document.getElementById("btn-theme").addEventListener("click", () => {
+  const isDark = document.documentElement.classList.contains("dark");
+  applyTheme(!isDark);
+  localStorage.setItem(LS_THEME, !isDark ? "dark" : "light");
+});
+
 // ── Utilities ──────────────────────────────────────────────────────────────
 function setStatus(msg, isError = false) {
   const el = document.getElementById("status-badge");
   el.textContent = msg;
   el.className = `text-xs px-2 py-1 rounded-md border ${isError
-    ? "text-red-400 bg-red-950/40 border-red-900"
-    : "text-gray-500 bg-gray-900 border-gray-800"}`;
+    ? "text-red-500 dark:text-red-400 bg-red-50 dark:bg-red-950/40 border-red-200 dark:border-red-900"
+    : "text-gray-500 bg-gray-100 dark:bg-gray-900 border-gray-200 dark:border-gray-800"}`;
 }
 
 // ── Boot ───────────────────────────────────────────────────────────────────
 (async () => {
+  // Restore unlocked state for this session
+  if (sessionStorage.getItem(SS_UNLOCKED) === "1") {
+    document.documentElement.classList.add("unlocked");
+  }
+
+  // Apply saved theme (theme is also applied in <head> to avoid flash,
+  // but we still need to set the correct icon here)
+  const savedDark = localStorage.getItem(LS_THEME) === "dark";
+  applyTheme(savedDark);
+
   const { token, gistId } = creds();
   if (!token || !gistId) openModal();
 
