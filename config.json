@@ -23,6 +23,10 @@
     {
       "url": "https://www.bbc.com/sport",
       "type": "rss"
+    },
+    {
+      "url": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+      "type": "rss"
     }
   ]
 }
