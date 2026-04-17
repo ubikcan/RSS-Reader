@@ -1,0 +1,1 @@
+This is a side-project of my AAAS Fellowship at DOE. The goal is to create a web-based app that automatically gathers subscribed RSS newsfeeds from DOE National Labs, specifically OLCF, ALCF, and NERSC.
