@@ -31,6 +31,10 @@
     {
       "url": "https://www.nersc.gov/news-and-events/news/",
       "type": "rss"
+    },
+    {
+      "url": "https://www.nersc.gov/news-and-events/news",
+      "type": "rss"
     }
   ]
 }
