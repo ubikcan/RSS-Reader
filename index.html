@@ -513,6 +513,16 @@ function render() {
 
       text.append(link, meta);
       row.append(btn, text);
+
+      if (item.image) {
+        const thumb = document.createElement("img");
+        thumb.src = item.image;
+        thumb.alt = "";
+        thumb.className = "flex-shrink-0 w-16 h-16 rounded object-cover";
+        thumb.onerror = () => thumb.remove();
+        row.appendChild(thumb);
+      }
+
       section.appendChild(row);
     }
 

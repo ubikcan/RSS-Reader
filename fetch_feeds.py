@@ -24,6 +24,38 @@ def load_existing_items():
     return {item["link"]: item for item in items}
 
 
+def extract_image(entry):
+    thumbnails = entry.get("media_thumbnail", [])
+    if thumbnails and isinstance(thumbnails, list):
+        url = thumbnails[0].get("url")
+        if url:
+            return url
+
+    for mc in entry.get("media_content", []):
+        if isinstance(mc, dict) and str(mc.get("type", "")).startswith("image/"):
+            url = mc.get("url")
+            if url:
+                return url
+
+    for enc in entry.get("enclosures", []):
+        if isinstance(enc, dict) and str(enc.get("type", "")).startswith("image/"):
+            url = enc.get("href")
+            if url:
+                return url
+
+    for field in ("summary", "content"):
+        raw = entry.get(field)
+        if isinstance(raw, list):
+            raw = raw[0].get("value", "") if raw else ""
+        if raw:
+            soup = BeautifulSoup(raw, "html.parser")
+            img = soup.find("img")
+            if img and img.get("src"):
+                return img["src"]
+
+    return None
+
+
 def fetch_rss(url):
     feed = feedparser.parse(url)
     items = []
@@ -38,6 +70,7 @@ def fetch_rss(url):
             "source": url,
             "published": published,
             "hash": None,
+            "image": extract_image(entry),
         })
     return items
 
