@@ -3,26 +3,22 @@
     {
       "url": "https://www.alcf.anl.gov/news/rss.xml",
       "type": "rss"
-    },
-    {
-      "url": "https://example.com/page",
-      "type": "scrape"
+    
+  
     },
     {
       "url": "https://www.ornl.gov/RssFeeds/ornl_news_releases.xml",
       "type": "rss"
     },
     {
-      "url": "https://www.olcf.ornl.gov/olcf-news/",
-      "type": "scrape"
+      "url": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
+      "type": "rss"
     },
     {
       "url": "https://www.anl.gov/taxonomy/term/3936/feed",
       "type": "rss"
-    },
-    {
-      "url": "https://www.bbc.com/sport",
-      "type": "rss"
+    
+   
     },
     {
       "url": "https://rss.app/feeds/U99DY5WSYFXt7Rv7.xml",
