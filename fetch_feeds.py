@@ -124,10 +124,13 @@ def main():
             link = item["link"]
             if link not in existing:
                 existing[link] = item
-            elif feed_type == "scrape" and item["hash"] != existing[link].get("hash"):
-                # Content changed — update hash and timestamp
-                existing[link]["hash"] = item["hash"]
-                existing[link]["published"] = item["published"]
+            else:
+                if feed_type == "scrape" and item["hash"] != existing[link].get("hash"):
+                    # Content changed — update hash and timestamp
+                    existing[link]["hash"] = item["hash"]
+                    existing[link]["published"] = item["published"]
+                if not existing[link].get("image") and item.get("image"):
+                    existing[link]["image"] = item["image"]
 
     output = list(existing.values())
     with open(OUTPUT_FILE, "w") as f:
