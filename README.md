@@ -8,4 +8,6 @@ Staging:
 
 &#9989; Where RSS feeds do not exist, either add a xml feed (eg created in rss.app) or make a bespoke scrape capability (if allowed).
 
-&#10060; Fix unsubscribe bug
+&#9989; Fix unsubscribe bug
+
+&#10060; Fix lack of unread/read persistence across browsers
