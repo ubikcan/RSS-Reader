@@ -10,6 +10,8 @@ Staging:
 
 &#9989; Fix unsubscribe bug
 
+&#9989; Add images
+
 &#10060; Fix lack of unread/read persistence across browsers
 
-&#10060; Add images
+
