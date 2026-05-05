@@ -1014,5 +1014,37 @@
     "published": "Wed, 29 Apr 2026 14:49:23 +0000",
     "hash": null,
     "image": "https://www.anl.gov/sites/www/files/2026-04/33485D_0896_PHY_ATLAS_RAISOR_1600x900.jpg"
+  },
+  {
+    "title": "INCITE program awards supercomputing time to 77 high-impact projects",
+    "link": "https://www.alcf.anl.gov/news/incite-program-awards-supercomputing-time-77-high-impact-projects",
+    "source": "https://www.alcf.anl.gov/news/rss.xml",
+    "published": "Tue, 05 May 2026 12:00:00 +0000",
+    "hash": null,
+    "image": null
+  },
+  {
+    "title": "Digital twin innovation cuts energy costs in water purification",
+    "link": "https://www.ornl.gov/news/digital-twin-innovation-cuts-energy-costs-water-purification",
+    "source": "https://www.ornl.gov/RssFeeds/ornl_news_releases.xml",
+    "published": "Tue, 05 May 2026 12:55:00 +0000",
+    "hash": null,
+    "image": "https://www.ornl.gov/sites/default/files/2026-04/Irvine%20doctoral%20student%20Pooria%20Ghorbani.jpg"
+  },
+  {
+    "title": "A different kind of leader: Scaling impact in geospatial science",
+    "link": "https://www.ornl.gov/news/different-kind-leader-scaling-impact-geospatial-science",
+    "source": "https://www.ornl.gov/RssFeeds/ornl_news_releases.xml",
+    "published": "Tue, 07 Apr 2026 12:49:28 +0000",
+    "hash": null,
+    "image": "https://www.ornl.gov/sites/default/files/2026-05/212dffc8-2001-468f-96de-fef5a05e7c10.jpg"
+  },
+  {
+    "title": "AI model delivers river temperature insights, strengthening US energy security",
+    "link": "https://www.ornl.gov/news/ai-model-delivers-river-temperature-insights-strengthening-us-energy-security",
+    "source": "https://www.ornl.gov/RssFeeds/ornl_news_releases.xml",
+    "published": "Thu, 30 Apr 2026 13:49:01 +0000",
+    "hash": null,
+    "image": "https://www.ornl.gov/sites/default/files/2026-04/map_nuclear_thermo05.jpg"
   }
 ]
