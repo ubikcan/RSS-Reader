@@ -1222,5 +1222,13 @@
     "published": "Fri, 22 May 2026 13:31:25 +0000",
     "hash": null,
     "image": "https://www.ornl.gov/sites/default/files/2026-05/Advincula.jpg"
+  },
+  {
+    "title": "ALCF launches first large-scale AI inference service for open science",
+    "link": "https://www.alcf.anl.gov/news/alcf-launches-first-large-scale-ai-inference-service-open-science",
+    "source": "https://www.alcf.anl.gov/news/rss.xml",
+    "published": "Tue, 26 May 2026 12:00:00 +0000",
+    "hash": null,
+    "image": null
   }
 ]
